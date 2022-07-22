@@ -17,7 +17,7 @@ from gnosis.safe.api import TransactionServiceApi
 from flaskr.abis import RELAYER_CONTRACT_ABI
 
 RELAYER_CONTRACT_ADDRESS = ChecksumAddress(
-    HexAddress(HexStr("0xeEB8eFAd68491066B5c4150112645190430e0e05"))
+    HexAddress(HexStr("0xCae5e615455196bF3de826FE8f7fBA8efAf19574"))
 )
 RELAYER_ACCOUNT: LocalAccount = Account.from_key(
     os.getenv(
