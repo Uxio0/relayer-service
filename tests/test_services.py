@@ -1,5 +1,7 @@
 import unittest
 
+from eth_typing import HexStr
+
 from gnosis.eth import EthereumClient, EthereumNetwork
 
 from flaskr.services import get_ethereum_client, relay_transaction
@@ -20,5 +22,8 @@ class TestServices(unittest.TestCase):
             ValueError, "Tx with safe-tx-hash .* was already executed on .*"
         ):
             relay_transaction(
-                4, "0x684bb3bf271db416fef707fe31050d4d79ce084e2c4281ca0219b85d5461118e"
+                4,
+                HexStr(
+                    "0x684bb3bf271db416fef707fe31050d4d79ce084e2c4281ca0219b85d5461118e"
+                ),
             )
