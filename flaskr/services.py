@@ -21,7 +21,7 @@ RELAYER_CONTRACT_ADDRESS = ChecksumAddress(
 )
 RELAYER_ACCOUNT: LocalAccount = Account.from_key(
     os.getenv(
-        "PRIVATE_KEY",
+        "RELAYER_KEY",
         "0x4f3edf983ac636a65a842ce7c78d9aa706d3b113bce9c46f30d7d21715b23b1d",
     )
 )
@@ -64,7 +64,7 @@ def relay_transaction(chain_id: int, safe_tx_hash: HexStr) -> HexBytes:
 
     # Build execTransaction data
     if not safe_tx.call():
-        raise ValueError(f"Tx with safe-tx-hash {safe_tx_hash} cannot be executed")
+        raise ValueError(f"Tx with safe-tx-hash {safe_tx_hash} is not valid")
 
     function_data = safe_tx.w3_tx.build_transaction({"gas": 0, "gasPrice": 0})["data"]
     # Strip selector from data
