@@ -29,6 +29,15 @@ def create_app(test_config=None) -> Flask:
     except OSError:
         pass
 
+    @app.errorhandler(ValueError)
+    def handle_exception(e):
+        """Return JSON instead of HTML for HTTP errors."""
+        return {
+            "code": 422,
+            "name": "ServiceError",
+            "description": e.args[0] if e.args else "",
+        }
+
     @app.route("/")
     def home():
         return redirect(url_for("about"))
@@ -41,7 +50,9 @@ def create_app(test_config=None) -> Flask:
     def health() -> str:
         return "OK"
 
-    @app.route("/v1/<int:chain_id>/relayed-transactions/<safe_tx_hash>")
+    @app.route(
+        "/v1/<int:chain_id>/relayed-transactions/<safe_tx_hash>/", methods=["POST"]
+    )
     def relay(chain_id: int, safe_tx_hash: HexStr) -> Dict[str, Any]:
         return {"tx_hash": relay_transaction(chain_id, safe_tx_hash).hex()}
 

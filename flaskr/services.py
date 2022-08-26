@@ -12,17 +12,25 @@ from web3.types import Wei
 from gnosis.eth import EthereumClient, EthereumNetwork
 from gnosis.eth.constants import NULL_ADDRESS
 from gnosis.safe import SafeTx
-from gnosis.safe.api import TransactionServiceApi
+from gnosis.safe.api import SafeAPIException, TransactionServiceApi
 
 from flaskr.abis import RELAYER_CONTRACT_ABI
 
 RELAYER_CONTRACT_ADDRESS = ChecksumAddress(
-    HexAddress(HexStr("0xCae5e615455196bF3de826FE8f7fBA8efAf19574"))
+    HexAddress(
+        HexStr(
+            os.getenv(
+                "RELAYER_CONTRACT_ADDRESS", "0xCae5e615455196bF3de826FE8f7fBA8efAf19574"
+            )
+        )
+    )
 )
 RELAYER_ACCOUNT: LocalAccount = Account.from_key(
-    os.getenv(
-        "RELAYER_KEY",
-        "0x4f3edf983ac636a65a842ce7c78d9aa706d3b113bce9c46f30d7d21715b23b1d",
+    HexStr(
+        os.getenv(
+            "RELAYER_KEY",
+            "0x4f3edf983ac636a65a842ce7c78d9aa706d3b113bce9c46f30d7d21715b23b1d",
+        )
     )
 )
 
@@ -54,9 +62,11 @@ def get_transaction(
 
 
 def relay_transaction(chain_id: int, safe_tx_hash: HexStr) -> HexBytes:
-    safe_tx, tx_hash = get_transaction(chain_id, safe_tx_hash)
-    if not safe_tx:
+    try:
+        safe_tx, tx_hash = get_transaction(chain_id, safe_tx_hash)
+    except SafeAPIException:
         raise ValueError(f"Tx with safe-tx-hash {safe_tx_hash} not found")
+
     if tx_hash:
         raise ValueError(
             f"Tx with safe-tx-hash {safe_tx_hash} was already executed on {tx_hash.hex()}"
