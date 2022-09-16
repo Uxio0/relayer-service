@@ -5,7 +5,7 @@ from flask import Flask, redirect, url_for
 
 from eth_typing import HexStr
 
-from .services import relay_transaction
+from .services import RELAYER_ACCOUNT, RELAYER_CONTRACT_ADDRESS, relay_transaction
 from .version import VERSION
 
 
@@ -44,7 +44,11 @@ def create_app(test_config=None) -> Flask:
 
     @app.route("/about/")
     def about() -> Dict[str, Any]:
-        return {"version": VERSION}
+        return {
+            "version": VERSION,
+            "relayer_account": RELAYER_ACCOUNT.address,
+            "relayer_contract": RELAYER_CONTRACT_ADDRESS,
+        }
 
     @app.route("/health/")
     def health() -> str:

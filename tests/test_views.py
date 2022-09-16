@@ -1,7 +1,16 @@
 import pytest
 
 
-@pytest.mark.parametrize("expected", [{"version": "0.0.1"}])
+@pytest.mark.parametrize(
+    "expected",
+    [
+        {
+            "version": "0.0.1",
+            "relayer_account": "0x90F8bf6A479f320ead074411a4B0e7944Ea8c9C1",
+            "relayer_contract": "0xCae5e615455196bF3de826FE8f7fBA8efAf19574",
+        }
+    ],
+)
 def test_view_about(client, expected):
     response = client.get("/about/").json
     assert expected == response
