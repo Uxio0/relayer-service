@@ -20,7 +20,7 @@ RELAYER_CONTRACT_ADDRESS = ChecksumAddress(
     HexAddress(
         HexStr(
             os.getenv(
-                "RELAYER_CONTRACT_ADDRESS", "0xCae5e615455196bF3de826FE8f7fBA8efAf19574"
+                "RELAYER_CONTRACT_ADDRESS", "0x569212Bc7D93F6B64aE922101BaE91d526A2913b"
             )
         )
     )
