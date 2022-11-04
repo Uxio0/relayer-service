@@ -22,8 +22,8 @@ class TestServices(unittest.TestCase):
             ValueError, "Tx with safe-tx-hash .* was already executed on .*"
         ):
             relay_transaction(
-                4,
+                5,
                 HexStr(
-                    "0x684bb3bf271db416fef707fe31050d4d79ce084e2c4281ca0219b85d5461118e"
+                    "0x2094d7db07419c03f640f3f904b5e56206e89b3b2bbf2dd53bdb4e5de3ec7c27"
                 ),
             )

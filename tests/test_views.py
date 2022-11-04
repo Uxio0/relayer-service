@@ -20,16 +20,16 @@ def test_view_about(client, expected):
     "chain_id,safe_tx_hash,expected",
     [
         (
-            4,
-            "0x684bb3bf271db416fef707fe31050d4d79ce084e2c4281ca0219b85d5461118e",
+            5,
+            "0x2094d7db07419c03f640f3f904b5e56206e89b3b2bbf2dd53bdb4e5de3ec7c27",
             {
                 "code": 422,
                 "name": "ServiceError",
-                "description": "Tx with safe-tx-hash 0x684bb3bf271db416fef707fe31050d4d79ce084e2c4281ca0219b85d5461118e was already executed on 0x31048de6de288edc6642eac933f6b0cffa9e05bee9dfaa2ad3b4ca0148178f26",
+                "description": "Tx with safe-tx-hash 0x2094d7db07419c03f640f3f904b5e56206e89b3b2bbf2dd53bdb4e5de3ec7c27 was already executed on 0x16ca996971d861c9b07a9d7861fb2ba9fa705c2cad9d96284afc48f72a7948d1",
             },
         ),
         (
-            4,
+            5,
             "0x684bb3bf271db416fef707fe31050d4d79ce084e2c4281ca0219b85d5461118a",
             {
                 "code": 422,

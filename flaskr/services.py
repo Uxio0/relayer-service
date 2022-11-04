@@ -38,7 +38,6 @@ RELAYER_ACCOUNT: LocalAccount = Account.from_key(
 @cache
 def get_ethereum_client(ethereum_network: EthereumNetwork) -> EthereumClient:
     networks_with_node_url = {
-        EthereumNetwork.RINKEBY: URI("https://rpc.ankr.com/eth_rinkeby"),
         EthereumNetwork.GOERLI: URI("https://rpc.ankr.com/eth_goerli"),
         EthereumNetwork.XDAI: URI("https://rpc.ankr.com/gnosis"),
     }
