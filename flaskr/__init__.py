@@ -4,6 +4,7 @@ from typing import Any, Dict
 from flask import Flask, redirect, url_for
 
 from eth_typing import HexStr
+from flask_cors import CORS
 
 from .services import RELAYER_ACCOUNT, RELAYER_CONTRACT_ADDRESS, relay_transaction
 from .version import VERSION
@@ -12,6 +13,10 @@ from .version import VERSION
 def create_app(test_config=None) -> Flask:
     # create and configure the app
     app = Flask(__name__, instance_relative_config=True)
+
+    # Enable CORS for all domains and routes
+    CORS(app)
+
     app.config.from_mapping(
         SECRET_KEY=os.environ.get("SECRET_KEY", "dev"),
     )
